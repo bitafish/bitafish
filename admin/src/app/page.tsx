@@ -1,4 +1,5 @@
-import Image from "next/image"
+import Image from 'next/image';
+import next from 'next';
 
 export default function Home() {
   return (
