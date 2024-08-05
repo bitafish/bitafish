@@ -26,15 +26,15 @@ services:
     depends_on:
       - postgres
 
-  admin-dashboard:
-    container_name: admin-dashboard
-    build: ./dist/apps/admin-dashboard
-    ports:
-      - 3000:3000
-    volumes:
-      - ./apps/admin-dashboard:/app
-    environment:
-      PORT: 3000
+  # admin-dashboard:
+  #   container_name: admin-dashboard
+  #   build: ./dist/apps/admin-dashboard
+  #   ports:
+  #     - 3000:3000
+  #   volumes:
+  #     - ./apps/admin-dashboard:/app
+  #   environment:
+  #     PORT: 3000
 
 volumes:
   local_db:
