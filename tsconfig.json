@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "baseUrl": "*",
+        "paths": {
+            "@bitafish/shared-ui": ["libs/shared-ui/src/index.ts"],
+            "@bitafish/shared-ui/components": ["libs/shared-ui/src/components"]
+        }
+    }
+}
