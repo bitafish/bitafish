@@ -1,0 +1,42 @@
+services:
+  postgres:
+    image: postgres
+    container_name: local_bitafish_db
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: bitafish-nejmimouhsine
+      POSTGRES_PASSWORD: nejmimouhsine
+      POSTGRES_DB: bitafish_db
+    volumes:
+      - local_db:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin_container
+    restart: always
+    ports:
+      - 8888:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: nejmimouhsine@bitafish.com
+      PGADMIN_DEFAULT_PASSWORD: bitafish/nejmimouhsine
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    depends_on:
+      - postgres
+
+  admin-dashboard:
+    container_name: admin-dashboard
+    build: ./dist/apps/admin-dashboard
+    ports:
+      - 3000:3000
+    volumes:
+      - ./apps/admin-dashboard:/app
+    environment:
+      PORT: 3000
+
+volumes:
+  local_db:
+  pgadmin:
+

@@ -15,7 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@bitafish/shared-types": ["shared-types/src/index.ts"]
+      "@bitafish/shared-types": ["shared-types/src/index.ts"],
+      "@bitafish/shared-ui": ["libs/shared-ui/src/index.ts"],
+      "@bitafish/shared-ui/server": ["libs/shared-ui/src/server.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

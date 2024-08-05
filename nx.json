@@ -34,7 +34,27 @@
         "targetName": "test"
       },
       "exclude": ["apps/server-e2e/**/*"]
+    },
+    {
+      "plugin": "@nx/next/plugin",
+      "options": {
+        "startTargetName": "start",
+        "buildTargetName": "build",
+        "devTargetName": "dev",
+        "serveStaticTargetName": "serve-static"
+      }
     }
   ],
-  "nxCloudAccessToken": "ZDFkMWM3N2UtMDlkNy00MmVkLThjNmUtMmE0YzhlMDNmNjhlfHJlYWQtd3JpdGU="
+  "nxCloudAccessToken": "ZDFkMWM3N2UtMDlkNy00MmVkLThjNmUtMmE0YzhlMDNmNjhlfHJlYWQtd3JpdGU=",
+  "generators": {
+    "@nx/next": {
+      "application": {
+        "style": "tailwind",
+        "linter": "eslint"
+      }
+    },
+    "@nx/react": {
+      "library": {}
+    }
+  }
 }
