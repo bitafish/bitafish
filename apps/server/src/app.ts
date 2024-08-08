@@ -1,8 +1,9 @@
-import { createSchema, createYoga } from 'graphql-yoga';
 import express, { Application } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-import morgan from 'morgan';
+
+import routes from './routes/index';
+import { HandleErrorWithLogger } from './utils/error/handler';
 
 class App {
   public app: Application;
@@ -10,27 +11,15 @@ class App {
   constructor() {
     this.app = express();
     this.middlewares();
-    this.setupGraphQLServer();
   }
 
   private middlewares = (): void => {
     this.app.use(cors());
-    this.app.use(morgan('dev'));
     this.app.use(helmet());
-  };
+    this.app.use(express.json());
+    this.app.use('/api/v1', routes);
 
-  private setupGraphQLServer = (): void => {
-    const yoga = createYoga({
-      schema: createSchema({
-        typeDefs: /* GraphQL */ `
-          type Query {
-            someNumber: Int!
-          }
-        `,
-        resolvers: {},
-      }),
-    });
-    this.app.use('/graphql', yoga);
+    this.app.use(HandleErrorWithLogger);
   };
 }
 
