@@ -1,7 +1,7 @@
 import { User } from '@bitafish/shared-types';
 import { PrismaClient } from '@prisma/client';
 
-import { IUserRepository } from '../interface/IUserRepository';
+import { IUserRepository } from '../interface/user/IUserRepository';
 
 export class UserRepository implements IUserRepository {
   private prisma: PrismaClient;
@@ -10,8 +10,12 @@ export class UserRepository implements IUserRepository {
     this.prisma = new PrismaClient();
   }
 
-  async findOne(email: string): Promise<User> {
+  async findByEmail(email: string): Promise<User> {
     return await this.prisma.user.findUnique({ where: { email } });
+  }
+
+  async findById(id: string): Promise<User> {
+    return await this.prisma.user.findUnique({ where: { id } });
   }
 
   async create({

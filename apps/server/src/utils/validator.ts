@@ -14,9 +14,11 @@ export const validate =
       next();
     } catch (error) {
       if (error instanceof ZodError) {
+        const errorMessages = error.errors.map((error) => error.message);
+
         return res.status(400).json({
           status: 'fail',
-          errors: error.errors,
+          errors: errorMessages,
         });
       }
       next(error);
