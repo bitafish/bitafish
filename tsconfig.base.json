@@ -16,7 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@bitafish/shared-types": ["libs/shared-types/src/index.ts"],
-      "@bitafish/shared-ui": ["libs/shared-ui/src/index.ts"],
+      "@bitafish/shared-ui": ["libs/shared-ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
