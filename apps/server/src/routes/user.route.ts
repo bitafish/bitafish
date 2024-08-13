@@ -12,6 +12,7 @@ const repository = new UserRepository();
 const service = new UserService(repository);
 const controller = new UserController(service);
 
+router.get('/', controller.getUsers.bind(controller));
 router.post(
   '/',
   validate(createUserSchema),
