@@ -5,8 +5,6 @@
   "scripts": {},
   "private": true,
   "dependencies": {
-    "@graphql-tools/load-files": "^7.0.0",
-    "@graphql-tools/schema": "^10.0.4",
     "@prisma/client": "^5.18.0",
     "@tabler/icons-react": "^3.11.0",
     "axios": "^1.6.0",
