@@ -17,15 +17,8 @@ export const createUserSchema = object({
     })
       .min(8, 'Password must be more than 8 characters')
       .max(32, 'Password must be less than 32 characters'),
-    // passwordConfirm: string({
-    //   required_error: 'Please confirm your password',
-    // }),
     role: z.optional(z.nativeEnum(RoleEnumType)),
   }),
-  // .refine((data) => data.password === data.passwordConfirm, {
-  //   path: ['passwordConfirm'],
-  //   message: 'Passwords do not match',
-  // }),
 });
 
 export const loginUserSchema = object({
@@ -39,9 +32,18 @@ export const loginUserSchema = object({
   }),
 });
 
-export type CreateUserInput = Omit<
-  TypeOf<typeof createUserSchema>['body'],
-  'passwordConfirm'
->;
+export const updateUserSchema = object({
+  body: object({
+    firstName: string().optional(),
+    lastName: string().optional(),
+    role: z.optional(z.nativeEnum(RoleEnumType)),
+    isEmailVerified: z.boolean().optional(),
+    image: z.string().optional(),
+  }),
+});
+
+export type CreateUserInput = TypeOf<typeof createUserSchema>['body'];
+
+export type UpdateUserInput = TypeOf<typeof updateUserSchema>['body'];
 
 export type LoginUserInput = TypeOf<typeof loginUserSchema>['body'];

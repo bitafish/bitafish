@@ -2,7 +2,7 @@ import { User } from '@bitafish/shared-types';
 import { PrismaClient } from '@prisma/client';
 
 import { IUserRepository } from '../interface/user/IUserRepository';
-import { CreateUserInput } from '../schemas/user.schema';
+import { CreateUserInput, UpdateUserInput } from '../schemas/user.schema';
 
 export class UserRepository implements IUserRepository {
   private prisma: PrismaClient;
@@ -42,5 +42,24 @@ export class UserRepository implements IUserRepository {
         role,
       },
     });
+  }
+
+  async update(
+    id: string,
+    { firstName, lastName, isEmailVerified, image }: UpdateUserInput
+  ) {
+    return await this.prisma.user.update({
+      where: { id },
+      data: {
+        firstName,
+        lastName,
+        isEmailVerified,
+        image,
+      },
+    });
+  }
+
+  async delete(userId: string) {
+    return await this.prisma.user.delete({ where: { id: userId } });
   }
 }

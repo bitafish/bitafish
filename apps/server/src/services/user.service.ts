@@ -1,8 +1,8 @@
 import { UserRepository } from '../repositories/user.repository';
 import { IUserService } from '../interface/user/IUserService';
 
-import { NotFoundError } from '../utils/error';
-import { CreateUserInput } from '../schemas/user.schema';
+import { AuthorizeError, NotFoundError } from '../utils/error';
+import { CreateUserInput, UpdateUserInput } from '../schemas/user.schema';
 
 export class UserService implements IUserService {
   private repository: UserRepository;
@@ -13,6 +13,20 @@ export class UserService implements IUserService {
 
   async getUsers(limit: number, offset: number) {
     return await this.repository.find(limit, offset);
+  }
+
+  async getMe(userId: string) {
+    if (!userId) {
+      throw new AuthorizeError('You are not logged in.');
+    }
+
+    const user = await this.repository.findById(userId);
+
+    if (!user) {
+      throw new NotFoundError('No User with this id found.');
+    }
+
+    return user;
   }
 
   async getUserById(id: string) {
@@ -55,5 +69,33 @@ export class UserService implements IUserService {
       password,
       role,
     });
+  }
+
+  async updateUser(
+    userId: string,
+    { firstName, lastName, isEmailVerified, image }: UpdateUserInput
+  ) {
+    const existingUser = await this.repository.findById(userId);
+
+    if (!existingUser) {
+      throw new NotFoundError('No User with this id found.');
+    }
+
+    return await this.repository.update(userId, {
+      firstName,
+      lastName,
+      isEmailVerified,
+      image,
+    });
+  }
+
+  async deleteUser(userId: string) {
+    const existingUser = await this.repository.findById(userId);
+
+    if (!existingUser) {
+      throw new NotFoundError('No User with this id found.');
+    }
+
+    return await this.repository.delete(userId);
   }
 }

@@ -27,5 +27,5 @@ export const HandleErrorWithLogger = (
     logger.warn(error); // ignore common errors caused by user
   }
 
-  res.status(status).json(data);
+  return res.status(status).json(data);
 };

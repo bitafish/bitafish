@@ -69,13 +69,7 @@ export class AuthController {
 
   async onRefreshAccessToken(req: Request, res: Response, next: NextFunction) {
     try {
-      const refreshTokenFromHeader = req.headers.cookie.match(
-        /refresh_token=([^;]+)/
-      )[1];
-
-      const refresh_token: string =
-        req.cookies?.refresh_token || refreshTokenFromHeader;
-
+      const refresh_token = req.cookies?.refresh_token;
       const access_token: string = await this.authService.refreshToken(
         refresh_token
       );
