@@ -1,14 +1,14 @@
-import express from 'express';
+import dotenv from 'dotenv';
 
-const host = process.env.HOST ?? 'localhost';
-const port = process.env.PORT ? Number(process.env.PORT) : 3000;
+import app from './app';
+import config from './config';
+import { logger } from './utils/logger';
 
-const app = express();
+dotenv.config();
 
-app.get('/', (req, res) => {
-  res.send({ message: 'Hello API' });
-});
+const host = config.host;
+const port = Number(config.port) || 4000;
 
-app.listen(port, host, () => {
-  console.log(`[ ready ] http://${host}:${port}`);
+app.listen(port, () => {
+  logger.info(`Server running on: http://${host}:${port}`);
 });
