@@ -7,6 +7,8 @@ import { UserRepository } from '../repositories/user.repository';
 import { UserService } from '../services/user.service';
 import { AuthController } from '../controllers/auth.controller';
 import { AuthService } from '../services/auth.service';
+import { deserializeUser } from '../middlewares/deserializeUser.middleware';
+import { requireUser } from '../middlewares/requireUser.middleware';
 
 const router = express.Router();
 
@@ -25,6 +27,9 @@ router.post(
   validate(loginUserSchema),
   controller.onLoginUser.bind(controller)
 );
+
+router.use(deserializeUser, requireUser);
 router.post('/refresh', controller.onRefreshAccessToken.bind(controller));
+router.post('/logout', controller.onLogout.bind(controller));
 
 export default router;

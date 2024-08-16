@@ -4,6 +4,7 @@ dotenv.config();
 const {
   PORT,
   HOST,
+  DATABASE_URL,
   ACCESS_TOKEN_PRIVATE_KEY,
   ACCESS_TOKEN_PUBLIC_KEY,
   ACCESS_TOKEN_EXPIRES_IN,
@@ -15,6 +16,7 @@ const {
 export default {
   port: PORT,
   host: HOST,
+  db_url: DATABASE_URL,
   jwt: {
     accessTokenPrivateKey: ACCESS_TOKEN_PRIVATE_KEY,
     accessTokenPublicKey: ACCESS_TOKEN_PUBLIC_KEY,
