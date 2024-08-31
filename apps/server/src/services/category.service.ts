@@ -7,6 +7,7 @@ import { CategoryRepository } from '../repositories/category.repository';
 
 import { NotFoundError } from '../utils/error';
 import { Category } from '@bitafish/shared-types';
+import { string } from 'zod';
 
 export class CategoryService implements ICategoryService {
   private repository: CategoryRepository;
@@ -18,15 +19,16 @@ export class CategoryService implements ICategoryService {
   async getCategories(limit: number, offset: number) {
     return await this.repository.find(limit, offset);
   }
-  async createCategory({ name }: CreateCategoryInput) {
-    try {
-      const category = await this.repository.create({
-        name,
-      });
-      return category;
-    } catch (error) {
-      throw new Error(`Error creating category: ${error.message}`);
+  async createCategory({ id, name }: { id: string; name: string }) {
+    const existingCategory = await this.repository.findById(id);
+
+    if (existingCategory) {
+      throw new Error('This Category already exists');
     }
+
+    return await this.repository.create({
+      name,
+    });
   }
   async getCategoryById(id: string) {
     const category = await this.repository.findById(id);
@@ -38,6 +40,11 @@ export class CategoryService implements ICategoryService {
   }
 
   async updateCategory(CategoryId: string, { name }: UpdateCategoryInput) {
+    const existingCategory = await this.repository.findById(CategoryId);
+
+    if (!existingCategory) {
+      throw new NotFoundError('No category with this id found');
+    }
     return await this.repository.update(CategoryId, { name });
   }
 

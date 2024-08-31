@@ -48,7 +48,7 @@ export class ProductService implements IProductService {
 
       return product;
     } catch (error) {
-      throw new Error(`Error creating product: ${error.message}`);
+      throw new Error('Error creating product');
     }
   }
   async updateProduct(

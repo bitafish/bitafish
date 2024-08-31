@@ -30,12 +30,6 @@ export class ProductController {
     try {
       const { id } = req.params;
       const product = await this.service.getProductById(id);
-      if (!product) {
-        return res.status(404).json({
-          status: 'fail',
-          message: 'Product not found',
-        });
-      }
 
       return res.status(200).json({
         status: 'success',
@@ -73,7 +67,7 @@ export class ProductController {
       next(error);
     }
   }
-  async onDeleteProduct(req: Request, res: Response, next: NextFunction) {
+  async productToDelete(req: Request, res: Response, next: NextFunction) {
     try {
       const productId: string = req.params.id;
       const deleteProduct = await this.service.deleteProduct(productId);

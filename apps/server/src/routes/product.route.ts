@@ -18,6 +18,6 @@ router.put(
   validate(updateProductSchema),
   controller.onUpdateProduct.bind(controller)
 );
-router.delete('/:id', controller.onDeleteProduct.bind(controller));
+router.delete('/:id', controller.productToDelete.bind(controller));
 
 export default router;

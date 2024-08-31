@@ -30,12 +30,6 @@ export class CategoryController {
     try {
       const { id } = req.params;
       const category = await this.service.getCategoryById(id);
-      if (!category) {
-        return res.status(404).json({
-          status: 'fail',
-          message: 'Category not found',
-        });
-      }
 
       return res.status(200).json({
         status: 'success',
@@ -50,7 +44,7 @@ export class CategoryController {
     try {
       const body = <CreateCategoryInput>req.body;
       const category = await this.service.createCategory(body);
-      res.status(201).json({
+      return res.status(201).json({
         status: 'success',
         data: { category },
       });

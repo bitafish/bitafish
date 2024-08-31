@@ -28,9 +28,6 @@ export const HandleErrorWithLogger = (
     logger.warn(error); // ignore common errors caused by user
   }
 
-  if (res.headersSent) {
-    return next(error); 
-  }
 
   return res.status(status).json(data);
 };
