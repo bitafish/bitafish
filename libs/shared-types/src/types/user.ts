@@ -1,10 +1,5 @@
 import { RoleEnumType } from '@prisma/client';
 
-// export enum RoleEnumType {
-//   ADMIN = 'admin',
-//   CLIENT = 'client',
-// }
-
 export interface User {
   id?: string;
   firstName: string;
