@@ -5,7 +5,6 @@ import { User } from '@bitafish/shared-types';
 
 export class UserController {
   private service: UserService;
-
   constructor(service: UserService) {
     this.service = service;
   }
@@ -15,7 +14,6 @@ export class UserController {
       const limit = Number(req.query['limit']) || 10;
       const offset = Number(req.query['offset']) || 0;
       const users = await this.service.getUsers(limit, offset);
-
       return res.status(200).json({
         status: 'success',
         data: { users },
