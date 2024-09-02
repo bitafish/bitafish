@@ -17,8 +17,8 @@ export class ReviewsController {
   async getReviews(req: Request, res: Response, next: NextFunction) {
     try {
       const query = req.query['where'];
-      const limit = Number(req.query['limit']);
-      const offset = Number(req.query['offset']);
+      const limit = Number(req.query['limit']) | 10;
+      const offset = Number(req.query['offset']) | 0;
       const reviews = await this.service.getReviews(
         query as ReviewQuery,
         limit,

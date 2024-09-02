@@ -85,12 +85,15 @@ model Order {
 }
 
 model OrderItem {
-  id        String @id @default(uuid())
+  id        String   @id @default(uuid())
   orderId   String
   productId String
   quantity  Int
+  price     Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  order Order @relation(fields: [orderId], references: [id])
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
 
   @@map(name: "orderItems")
 }
