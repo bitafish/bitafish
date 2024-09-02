@@ -12,8 +12,8 @@ export class UserController {
 
   async getUsers(req: Request, res: Response, next: NextFunction) {
     try {
-      const limit = Number(req.query['limit']);
-      const offset = Number(req.query['offset']);
+      const limit = Number(req.query['limit']) || 10;
+      const offset = Number(req.query['offset']) || 0;
       const users = await this.service.getUsers(limit, offset);
 
       return res.status(200).json({

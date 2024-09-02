@@ -70,6 +70,7 @@ export class AuthController {
   async onRefreshAccessToken(req: Request, res: Response, next: NextFunction) {
     try {
       const refresh_token = req.cookies?.refresh_token;
+
       const access_token: string = await this.authService.refreshToken(
         refresh_token
       );

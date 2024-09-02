@@ -16,6 +16,8 @@ export const accessTokenCookieOptions: CookieOptions = {
 
 export const refreshTokenCookieOptions: CookieOptions = {
   ...cookiesOptions,
-  expires: new Date(Date.now() + config.jwt.refreshTokenExpiresIn * 60 * 1000),
-  maxAge: config.jwt.refreshTokenExpiresIn * 60 * 1000,
+  expires: new Date(
+    Date.now() + config.jwt.refreshTokenExpiresIn * 24 * 3600 * 1000
+  ),
+  maxAge: config.jwt.refreshTokenExpiresIn * 24 * 3600 * 1000,
 };
