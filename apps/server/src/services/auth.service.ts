@@ -18,7 +18,7 @@ export class AuthService {
     });
 
     const refresh_token = signJwt({ sub: userId }, 'refreshTokenPrivateKey', {
-      expiresIn: `${config.jwt.refreshTokenExpiresIn}m`,
+      expiresIn: `${config.jwt.refreshTokenExpiresIn}d`,
     });
 
     return { access_token, refresh_token };
@@ -27,8 +27,14 @@ export class AuthService {
   async loginUser(email: string, password: string) {
     const user = await this.userRepository.findByEmail(email);
 
-    const isPasswordMatches = await bcrypt.compare(password, user.password);
-    if (!user || !isPasswordMatches) {
+    if (!user) {
+      throw new NotFoundError(
+        'Invalid credentials! No User with this email found.'
+      );
+    }
+
+    const isPasswordMatches = await bcrypt.compare(password, user?.password);
+    if (!isPasswordMatches) {
       throw new ValidationError('Incorrect email or password.');
     }
 

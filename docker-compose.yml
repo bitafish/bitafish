@@ -8,7 +8,7 @@ services:
     environment:
       POSTGRES_USER: bitafish-nejmimouhsine
       POSTGRES_PASSWORD: nejmimouhsine
-      POSTGRES_DB: bitafish_db
+      POSTGRES_DB: bitafish
     volumes:
       - local_db:/var/lib/postgresql/data
 
@@ -39,4 +39,3 @@ services:
 volumes:
   local_db:
   pgadmin:
-
